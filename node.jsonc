@@ -1,0 +1,16 @@
+/*
+    Data structure for a Node in our breadboard.
+*/
+{
+    "in": {
+        "in1": null
+    },
+    "out": {
+        "console": null,
+        "out1": null
+    },
+    "attributes": {
+        "attr1": 12,
+        "attr2" : "hello"
+    }
+}
