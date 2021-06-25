@@ -14,3 +14,28 @@
         "attr2" : "hello"
     }
 }
+/*
+Inputs and outputs are constructed as such:
+
+
+data Input = Input [InputAdaptor] Type
+data Output = Output [OutputAdaptor] Type
+
+
+Different construcotrs defining the scope of a Connection
+data Connection = FullDuplex Input Ouput | HalfDuplexIn Input | HalfDuplexOut Output
+
+Shape = Circle r | Square s
+Publicize capabilities as dijoint union of type constructors.
+
+
+area :: Shape -> Int
+area (Circle 
+
+
+data InputAdaptor = IAdaptor ExternalDataShape RequiredDataShape (ExternalDataShape -> RequiredDataShape)
+data OutputAdaptor = OAdaptor InternalDataShape RequiredDataShape (InternalDataShape -> RequiredDataShape)
+
+
+
+*/
