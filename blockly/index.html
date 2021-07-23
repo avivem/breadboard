@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--<script src="https://unpkg.com/blockly/blockly.min.js"></script>-->
+
+    <script src="https://unpkg.com/google-blockly/blockly_compressed.js"></script>
+    <script src="https://unpkg.com/google-blockly/javascript_compressed.js"></script>
+    <script src="https://unpkg.com/google-blockly/blocks_compressed.js"></script>
+    <script src="https://unpkg.com/google-blockly/msg/js/en.js"></script>
+
+</head>
+
+<body>
+    <button onclick="genCode()">Gen Code</button>
+    <div id="blocklyDiv" style="height: 1500px; width: 1500px;"></div>
+    <xml id="toolbox" style="display: none">
+        <block type="controls_if"></block>
+        <block type="controls_repeat_ext"></block>
+        <block type="logic_compare"></block>
+        <block type="math_number"></block>
+        <block type="math_arithmetic"></block>
+        <block type="text"></block>
+        <block type="text_print"></block>
+        <block type="add_node"></block>
+        <block type="add_input"></block>
+    </xml>
+    <script>
+        var workspace = Blockly.inject('blocklyDiv',
+            { toolbox: document.getElementById('toolbox') });
+        Blockly.defineBlocksWithJsonArray([{
+            "type": "add_node",
+            "message0": "Add Node %1 inputs %2 outputs %3 arguments %4",
+            "args0": [
+                {
+                    "type": "input_dummy",
+                    "align": "CENTRE"
+                },
+                {
+                    "type": "input_statement",
+                    "name": "inputs"
+                },
+                {
+                    "type": "input_statement",
+                    "name": "outputs"
+                },
+                {
+                    "type": "input_statement",
+                    "name": "arguments"
+                }
+            ],
+            "previousStatement": null,
+            "nextStatement": null,
+            "colour": 105,
+            "tooltip": "",
+            "helpUrl": ""
+        },
+        {
+            "type": "add_input",
+            "message0": "name %1 type %2",
+            "args0": [
+                {
+                    "type": "field_input",
+                    "name": "name",
+                    "text": "default"
+                },
+                {
+                    "type": "field_dropdown",
+                    "name": "type",
+                    "options": [
+                        [
+                            "string",
+                            "STRING"
+                        ],
+                        [
+                            "boolean",
+                            "BOOLEAN"
+                        ],
+                        [
+                            "number",
+                            "NUMBER"
+                        ]
+                    ]
+                }
+            ],
+            "previousStatement": null,
+            "nextStatement": null,
+            "colour": 230,
+            "tooltip": "",
+            "helpUrl": ""
+        }])
+        var code;
+        function genCode() {
+            Blockly.JavaScript.addReservedWords('code');
+            code = Blockly.JavaScript.workspaceToCode(workspace);
+        }
+        Blockly.JavaScript['add_node'] = function (block) {
+            var statements_inputs = Blockly.JavaScript.statementToCode(block, 'inputs');
+            var statements_outputs = Blockly.JavaScript.statementToCode(block, 'outputs');
+            var statements_arguments = Blockly.JavaScript.statementToCode(block, 'arguments');
+            // TODO: Assemble JavaScript into code variable.
+            var code = '...;\n';
+            return code;
+        };
+
+        Blockly.JavaScript['add_input'] = function (block) {
+            var text_name = block.getFieldValue('name');
+            var dropdown_type = block.getFieldValue('type');
+            // TODO: Assemble JavaScript into code variable.
+            
+            var code = '...;\n';
+            return code;
+        };
+    </script>
+</body>
+
+</html>

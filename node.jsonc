@@ -1,19 +1,133 @@
 /*
     Data structure for a Node in our breadboard.
 */
-{
-    "in": {
-        "in1": null
+[
+    {
+        "in": {
+            "in1": null
+        },
+        "out": {
+            "console": null,
+            "out1": null
+        },
+        "attributes": {
+            "attr1": 12,
+            "attr2" : "hello"
+        }
     },
-    "out": {
-        "console": null,
-        "out1": null
+    //Need to be able to translate everything into a message passing operation.
+    //Redefine a node to be an instance of a blackbox service.
+
+    /*
+        New Idea:
+        - Template: Defines a common type of node (example a HTTP template
+        - Node: A blackbox service that can be instantiated with a template
+        - Action: 
+
+    */
+
+    //TODO: potentially write in JSON-schema: https://json-schema.org/
+    //Template:
+    {
+        "name": "HTTP API",
+        "inputs": {
+            
+        },
+        "outputs": {
+            "log" : "string" // stream of strings?
+        },
+        "attributes": {
+            "host" : "string",
+            "port" : "integer",
+            "ignoreCORS" : "boolean"
+        },
+        //Template for actions.
+        "actions": [
+            {
+                "name": "GET",
+                "description": "GET request",
+                "inputs": {
+                    "headers": {
+                        "type": "array",
+                        "items": "string"
+                    },
+                    "parameters": {
+                        "type": "array",
+                        "items": "string"
+                    },
+                    "body" : "string"
+                },
+                "outputs": {
+                    "responseCode": "integer",
+                    "headers": {
+                        "type": "array",
+                        "items": "string"
+                    },
+                    "body": "string"
+                }
+            },
+            {
+                "name": "POST",
+                "description": "POST request",
+                "inputs": {
+                    "headers": {
+                        "type": "array",
+                        "items": "string"
+                    },
+                    "parameters": {
+                        "type": "array",
+                        "items": "string"
+                    },
+                    "body" : "string"
+                },
+                "outputs": {
+                    "responseCode": "integer",
+                    "headers": {
+                        "type": "array",
+                        "items": "string"
+                    },
+                    "body": "string"
+                }
+                
+            }
+            // ... pretend there is PUT, DELETE, etc.
+        ]
     },
-    "attributes": {
-        "attr1": 12,
-        "attr2" : "hello"
+
+    //Node - built from template.
+    {
+        "name": "Weather API",
+        "template": "HTTP API",
+        "outputs": {
+            "log" : "[Weather API]::outputs.log" // map the log output to this 
+        },
+        "attributes": {
+            "host" : "weather.com",
+            "port" : 80,
+            "ignoreCORS" : false
+        },
+        "actions": [
+            {
+                "name": "get_weather_at",
+                "description": "Get weather at a specific location",
+                "inputs": {
+                    "headers": {
+                        "X-API-KEY": "w0er9gbuwer0bg9b34gf3"
+                    },
+                    "parameters": {
+                        "location": "Rockville, MD",
+                        "forecast": "12H"
+                    }
+                },
+                "outputs": {
+                    "responseCode": "integer",
+                    "body": "string"
+                }
+            }
+        ]
     }
-}
+]
+
 /*
 Inputs and outputs are constructed as such:
 
